@@ -9,9 +9,13 @@
 <h3>Data Structures</h3>
 1. [Linked List](https://github.com/cerebrium/rust_ds_algo/tree/main/linkedLists)
 
-
-
-<footer>Nicholas Shankland</footer>
+<br />
+<br />
+<br />
+<hr />
+<footer>
+  <u>Nicholas Shankland</u>
+</footer>
 
 
 
