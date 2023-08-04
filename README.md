@@ -1,4 +1,4 @@
-<h1>Rust Implementations of Data structures and Algorithms Questions</h1>h1>
+<h1>Rust Implementations of Data structures and Algorithms Questions</h1>
 
 <hr />
 
