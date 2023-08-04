@@ -16,9 +16,7 @@
 <br />
 <br />
 <hr />
-<footer>
-  <u><i>Nicholas Shankland</i></u>
-</footer>
+
 
 
 
