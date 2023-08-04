@@ -10,7 +10,7 @@
 
 <hr />
 <h4>Data Structures</h4>
-1. [Linked List](https://github.com/cerebrium/rust_ds_algo/tree/main/linkedLists)
+1. <a>https://github.com/cerebrium/rust_ds_algo/tree/main/linkedLists</a>
 
 <br />
 <br />
