@@ -1,6 +1,5 @@
 <h1>Rust Implementations of Data structures and Algorithms Questions</h1>
 
-<hr />
 
 <h3>Algorithms</h3>
 1. [Binary Search Algorithm](https://github.com/cerebrium/rust_ds_algo/tree/main/binary_search)
