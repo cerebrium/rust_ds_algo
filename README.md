@@ -1,6 +1,16 @@
-# Rust Implementations of Data structures and Algorithms Questions
-[Linked List](https://github.com/cerebrium/rust_ds_algo/tree/main/linkedLists)
+<h1>Rust Implementations of Data structures and Algorithms Questions</h1>h1>
+
+<hr />
+
+<h3>Algorithms</h3>
+1. [Binary Search Algorithm](https://github.com/cerebrium/rust_ds_algo/tree/main/binary_search)
+
+
+<hr />
+<h3>Data Structures</h3>
+1. [Linked List](https://github.com/cerebrium/rust_ds_algo/tree/main/linkedLists)
+
+<hr />
 
 
 
-[Binary Search Algorithm](https://github.com/cerebrium/rust_ds_algo/tree/main/binary_search)
