@@ -7,7 +7,7 @@
 <br />
 <br />
 <br />
-<hr />
+
 <hr />
 <h3>Data Structures</h3>
 1. [Linked List](https://github.com/cerebrium/rust_ds_algo/tree/main/linkedLists)
@@ -17,7 +17,7 @@
 <br />
 <hr />
 <footer>
-  <u>Nicholas Shankland</u>
+  <u><i>Nicholas Shankland</i></u>
 </footer>
 
 
