@@ -4,7 +4,10 @@
 <h3>Algorithms</h3>
 1. [Binary Search Algorithm](https://github.com/cerebrium/rust_ds_algo/tree/main/binary_search)
 
-
+<br />
+<br />
+<br />
+<hr />
 <hr />
 <h3>Data Structures</h3>
 1. [Linked List](https://github.com/cerebrium/rust_ds_algo/tree/main/linkedLists)
