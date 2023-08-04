@@ -2,7 +2,7 @@
 
 
 <h4> Algorithms</h4>
-1. [Binary Search Algorithm](https://github.com/cerebrium/rust_ds_algo/tree/main/binary_search)
+1. <a href="https://github.com/cerebrium/rust_ds_algo/tree/main/binary_search"> Binary Search Algorithm</a>
 
 <br />
 <br />
