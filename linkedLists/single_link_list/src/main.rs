@@ -7,7 +7,7 @@ fn main() {
     let linked_head = LNode::create_linked_list(nums);
 
     match linked_head {
-        Ok(node) => LNode::print_list(node),
+        Ok(node) => LNode::print_list(&node),
         Err(_) => panic!("lined_head panic!"),
     }
 }

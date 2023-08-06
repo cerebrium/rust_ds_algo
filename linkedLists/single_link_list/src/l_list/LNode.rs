@@ -63,7 +63,13 @@ impl LNode {
         Ok(head)
     }
 
-    pub fn print_list(head: LNode) {
-        println!("head.next: {:?}", head);
+    pub fn print_list(head: &LNode) {
+        println!("vals: {}", head.val);
+        let mut curr = &head.next;
+
+        while let Some(node) = curr {
+            println!("{}", node.val);
+            curr = &node.next
+        }
     }
 }
