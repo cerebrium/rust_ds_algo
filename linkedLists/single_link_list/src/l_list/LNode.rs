@@ -53,10 +53,10 @@ impl LNode {
                         boxed_val.next = Some(Box::new(LNode::new(*num, None)));
                         curr = &mut boxed_val.next;
                     }
-                    None => todo!(),
+                    None => return Err(anyhow::anyhow!("issue with the curr ref")),
                 }
             } else {
-                return Err(anyhow::anyhow!("issue with first"));
+                return Err(anyhow::anyhow!("issue with the loop"));
             }
         }
 
