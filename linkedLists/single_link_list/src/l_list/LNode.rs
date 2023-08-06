@@ -63,6 +63,11 @@ impl LNode {
         Ok(head)
     }
 
+    pub fn add_node(mut self, val: usize) -> LNode {
+        self.next = Some(Box::new(LNode::new(val, None)));
+        self
+    }
+
     pub fn print_list(head: &LNode) {
         println!("vals: {}", head.val);
         let mut curr = &head.next;
