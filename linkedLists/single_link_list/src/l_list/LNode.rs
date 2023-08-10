@@ -1,9 +1,11 @@
 use std::fmt::Display;
 
+type Link = Option<Box<LNode>>;
+
 #[derive(Clone, Debug, Default)]
 pub struct LNode {
-    val: usize,
-    next: Option<Box<LNode>>,
+    pub val: usize,
+    pub next: Link,
 }
 
 impl Display for LNode {
@@ -13,7 +15,7 @@ impl Display for LNode {
 }
 
 impl LNode {
-    pub fn new(val: usize, next: Option<Box<LNode>>) -> Self {
+    pub fn new(val: usize, next: Link) -> Self {
         Self { val, next }
     }
 
@@ -31,7 +33,7 @@ impl LNode {
         }
 
         let mut head: LNode;
-        let mut curr: &mut Option<Box<LNode>>;
+        let mut curr: &mut Link;
 
         if let Some(num) = nums.first() {
             head = LNode::new(*num, None);
@@ -66,6 +68,17 @@ impl LNode {
     pub fn add_node(mut self, val: usize) -> LNode {
         self.next = Some(Box::new(LNode::new(val, None)));
         self
+    }
+
+    pub fn replace_node_val(mut self, val: usize) -> LNode {
+        self.val = val;
+        self
+    }
+
+    pub fn delete_next_node(&mut self, k: usize) {
+        let mut prev: &LNode;
+
+        self.next.take().map(|node| println!("{:?}", node));
     }
 
     pub fn print_list(head: &LNode) {
