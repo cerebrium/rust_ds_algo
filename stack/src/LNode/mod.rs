@@ -1,2 +1,2 @@
 pub mod LNode;
-pub mod Que;
+pub mod Stack;
