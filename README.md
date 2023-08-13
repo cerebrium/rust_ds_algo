@@ -2,8 +2,10 @@
 
 
 <h4> Algorithms</h4>
-1. <a href="https://github.com/cerebrium/rust_ds_algo/tree/main/binary_search"> Binary Search Algorithm</a><br />
-2. <a href="https://github.com/cerebrium/rust_edit_distance">Edit Distance</a>
+<ul>
+  <li><a href="https://github.com/cerebrium/rust_ds_algo/tree/main/binary_search"> Binary Search Algorithm</a></li>
+  <li><a href="https://github.com/cerebrium/rust_edit_distance">Edit Distance</a></li>
+</ul>
 
 <br />
 <br />
