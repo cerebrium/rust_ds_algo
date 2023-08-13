@@ -11,6 +11,13 @@ fn main() {
     stack.push(4);
     stack.push(5);
 
+    println!("current stack: {}", stack);
+
     let returned_val = stack.pop();
-    println!(" value: {:?}", returned_val);
+    println!("did pop");
+    println!("current stack: {}", stack);
+
+    if let Some(returned_val) = returned_val {
+        println!(" returned value: {:?}", returned_val);
+    }
 }

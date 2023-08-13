@@ -65,16 +65,6 @@ impl LNode {
         Ok(head)
     }
 
-    pub fn add_node(mut self, val: usize) -> LNode {
-        self.next = Some(Box::new(LNode::new(val, None)));
-        self
-    }
-
-    pub fn replace_node_val(mut self, val: usize) -> LNode {
-        self.val = val;
-        self
-    }
-
     pub fn delete_next_node(&mut self, k: usize) {
         let mut prev: &LNode;
 

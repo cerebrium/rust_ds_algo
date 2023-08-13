@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use super::LNode::{LNode, Link};
 
 #[derive(Debug)]
@@ -26,5 +28,20 @@ impl Stack {
 impl Default for Stack {
     fn default() -> Self {
         Self { head: None }
+    }
+}
+
+impl Display for Stack {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut curr = &self.head;
+
+        while let Some(p_node) = curr {
+            let curr_v = p_node.val;
+            curr = &p_node.next;
+
+            write!(f, "{}", curr_v);
+        }
+
+        Ok(())
     }
 }

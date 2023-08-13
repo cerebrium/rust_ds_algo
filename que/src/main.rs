@@ -11,6 +11,10 @@ fn main() {
     que.enque(5);
     println!("que: {}", que);
 
-    que.deque();
-    println!("que: {}", que)
+    let returned_val = que.deque();
+    println!("que: {}", que);
+
+    if let Some(r_v) = returned_val {
+        println!("returned val: {:?}", r_v);
+    }
 }
