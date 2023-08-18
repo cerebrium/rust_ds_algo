@@ -90,23 +90,20 @@ impl Map {
         (x, y): (usize, usize),
         mut path: Vec<(usize, usize)>,
     ) -> Option<Vec<(usize, usize)>> {
-        println!("terate running: {:?}", (x, y));
+        let mut str_x_y = x.to_string();
+        let y_str = y.to_string();
+        str_x_y.push_str(&y_str);
 
-        let mut str_x_y = y.to_string();
-        let x_str = x.to_string();
-        str_x_y.push_str(&x_str);
-
+        println!("THE XY HERE: {:?}", str_x_y);
         self.visited.take().insert(str_x_y, true);
 
         if let Some(arr) = self.map.get(x) {
             println!("what is the arr: {:?}", arr);
             if let Some(val) = arr.get(y) {
-                println!("what is the val: {:?}", val);
                 match val {
                     'P' | 'S' => {
                         path.push((x, y));
 
-                        println!("inside the ");
                         for viable_target in Self::viable_paths(&self, (x, y)) {
                             let res = Self::_iterate(&self, viable_target, path.clone());
                             if let Some(end) = res {
@@ -115,7 +112,6 @@ impl Map {
                         }
                     }
                     'E' => {
-                        println!("inside the end");
                         path.push((x, y));
                         return Some(path);
                     }
@@ -136,9 +132,11 @@ impl Map {
                 let mut str_x_y = x_p_o.to_string();
                 let y_str = y.to_string();
                 str_x_y.push_str(&y_str);
+                println!("what is the str: {:?}", str_x_y);
 
                 str_x_y.push('y');
                 if !self.visited.take().contains_key(&str_x_y) {
+                    println!("THISS IS BEING REACHED");
                     viable_paths.push((x + 1, y))
                 }
             })
@@ -160,8 +158,8 @@ impl Map {
         self.map.get(x).map(|arr| {
             arr.get(y + 1).map(|_| {
                 let y_p_o = y + 1;
-                let mut str_x_y = y_p_o.to_string();
-                let x_str = x.to_string();
+                let mut str_x_y = x.to_string();
+                let x_str = y_p_o.to_string();
                 str_x_y.push_str(&x_str);
 
                 if !self.visited.take().contains_key(&str_x_y) {
@@ -173,8 +171,8 @@ impl Map {
         self.map.get(x).map(|arr| {
             arr.get(y - 1).map(|_| {
                 let y_p_o = y - 1;
-                let mut str_x_y = y_p_o.to_string();
-                let x_str = x.to_string();
+                let mut str_x_y = x.to_string();
+                let x_str = y_p_o.to_string();
                 str_x_y.push_str(&x_str);
 
                 if !self.visited.take().contains_key(&str_x_y) {
