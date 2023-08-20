@@ -5,6 +5,7 @@
 <ul>
   <li><a href="https://github.com/cerebrium/rust_ds_algo/tree/main/binary_search"> Binary Search Algorithm</a></li>
   <li><a href="https://github.com/cerebrium/rust_edit_distance">Edit Distance</a></li>
+  <li><a href="https://github.com/cerebrium/rust_ds_algo/blob/main/path/src/main.rs">Path through maze</a></li>
 </ul>
 
 <br />
