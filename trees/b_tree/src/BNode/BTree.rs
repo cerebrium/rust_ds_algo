@@ -36,27 +36,71 @@ impl BTree {
         }
     }
 
-    pub fn print_tree(&self) {
-        BTree::recursvie_print(&self.head);
+    pub fn print_tree_pre_order(&self) -> Vec<usize> {
+        let mut nums = vec![];
+        BTree::recursvie_print(&self.head, &mut nums);
+        nums
+    }
+
+    pub fn print_tree_in_order(&self) -> Vec<usize> {
+        let mut nums = vec![];
+        BTree::recursvie_print_in_order(&self.head, &mut nums);
+        nums
+    }
+
+    pub fn print_tree_in_post_order(&self) -> Vec<usize> {
+        let mut nums = vec![];
+        BTree::recursive_print_post_order(&self.head, &mut nums);
+        nums
     }
 
     // Private
-    fn recursvie_print(node: &Link) {
+    fn recursvie_print(node: &Link, nums: &mut Vec<usize>) {
         if let Some(node) = node.clone().take() {
-            println!("Val: {:?}", &node.borrow().val);
-
+            nums.push(node.borrow().val);
             if let Some(left) = &node.borrow().left {
                 let copied = left.clone();
-                BTree::recursvie_print(&Some(copied));
+                BTree::recursvie_print(&Some(copied), nums);
             }
 
             if let Some(right) = &node.borrow().right {
                 let copied = right.clone();
-                BTree::recursvie_print(&Some(copied));
+                BTree::recursvie_print(&Some(copied), nums);
             }
         }
     }
 
+    fn recursvie_print_in_order(node: &Link, nums: &mut Vec<usize>) {
+        if let Some(node) = node.clone().take() {
+            if let Some(left) = &node.borrow().left {
+                let copied = left.clone();
+                BTree::recursvie_print_in_order(&Some(copied), nums)
+            }
+
+            nums.push(node.borrow().val);
+
+            if let Some(right) = &node.borrow().right {
+                let copied = right.clone();
+                BTree::recursvie_print_in_order(&Some(copied), nums)
+            }
+        }
+    }
+
+    fn recursive_print_post_order(node: &Link, nums: &mut Vec<usize>) {
+        if let Some(node) = node.clone().take() {
+            if let Some(left) = &node.borrow().left {
+                let copied = left.clone();
+                BTree::recursive_print_post_order(&Some(copied), nums)
+            }
+
+            if let Some(right) = &node.borrow().right {
+                let copied = right.clone();
+                BTree::recursive_print_post_order(&Some(copied), nums)
+            }
+
+            nums.push(node.borrow().val);
+        }
+    }
     /*
      *
      * Base Cases:
