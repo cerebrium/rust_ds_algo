@@ -72,8 +72,8 @@ impl BTree {
 
             local_compare_val > min
                 && local_compare_val < max
-                && BTree::iterate(&e_node.borrow().left, e_node.borrow().val as i32, min)
-                && BTree::iterate(&e_node.borrow().right, max, e_node.borrow().val as i32)
+                && BTree::iterate(&e_node.borrow().left, local_compare_val, min)
+                && BTree::iterate(&e_node.borrow().right, max, local_compare_val)
         } else {
             true
         }
