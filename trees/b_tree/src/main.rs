@@ -6,6 +6,8 @@ fn main() {
     let mut b_tree = BTree::default(20);
     make_tree(&mut b_tree);
     b_tree.print_tree();
+    let is_valid = b_tree.validate();
+    println!("is this valid: {:?}", is_valid);
 }
 
 fn make_tree(b_tree: &mut BTree) {
