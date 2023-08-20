@@ -19,6 +19,7 @@
 <li><a href="https://github.com/cerebrium/rust_ds_algo/tree/main/linkedLists">Linked List</a></li>
 <li><a href="https://github.com/cerebrium/rust_ds_algo/blob/main/stack/src/LNode/Stack.rs">Stack</a></li>
 <li><a href="https://github.com/cerebrium/rust_ds_algo/blob/main/que/src/LNode/Que.rs">Que</a></li>
+<li><a href="https://github.com/cerebrium/rust_ds_algo/blob/main/trees/b_tree/src/BNode/BTree.rs">Binary Tree</a></li>
   
 </ul>
 <br />
