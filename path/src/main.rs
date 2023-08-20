@@ -74,7 +74,7 @@ impl Map {
                 }
             };
         }
-        Some(vec![])
+        None
     }
 
     fn _iterate(
