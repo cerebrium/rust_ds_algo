@@ -1,4 +1,4 @@
-use std::{cell::Cell, collections::HashMap};
+use std::{borrow::BorrowMut, cell::Cell, collections::HashSet};
 
 fn main() {
     let test_data: Vec<Vec<char>> = vec![
@@ -13,21 +13,23 @@ fn main() {
         map: test_data,
         height,
         width,
-        visited: Cell::new(HashMap::new()),
+        visited: HashSet::new(),
     };
     let path = new_map.find_path();
-    println!("Path: {:?}", path);
+    if let Some(final_path) = path {
+        println!(" {:?}", final_path);
+    }
 }
 
 struct Map {
     map: Vec<Vec<char>>,
     width: usize,
     height: usize,
-    visited: Cell<HashMap<String, bool>>,
+    visited: HashSet<usize>,
 }
 
 impl Map {
-    pub fn find_path(&mut self) -> Vec<(usize, usize)> {
+    pub fn find_path(&mut self) -> Option<Vec<(usize, usize)>> {
         /*
          *
          * Base Cases:
@@ -40,15 +42,13 @@ impl Map {
         let height = self.height;
         let width = self.width - 1;
 
-        let answer = for x in 0..height {
+        for x in 0..height {
             match x {
                 0 => {
                     for y in 0..self.map[x].len() {
                         let val = self.map[x][y];
                         if val == 'S' {
-                            if let Some(path) = Self::_iterate(&self, (x, y), vec![]) {
-                                return path;
-                            }
+                            return Self::_iterate(self, (x, y), vec![]);
                         }
                     }
                 }
@@ -56,10 +56,7 @@ impl Map {
                     for y in 0..self.map[x].len() {
                         let val = self.map[x][y];
                         if val == 'S' {
-                            if let Some(path) = Self::_iterate(&self, (x, y), vec![]) {
-                                println!("what is the path: {:?}", path);
-                                return path;
-                            }
+                            return Self::_iterate(self, (x, y), vec![]);
                         }
                     }
                 }
@@ -69,43 +66,34 @@ impl Map {
                     let last = self.map[x][width];
 
                     if first == 'S' {
-                        if let Some(path) = Self::_iterate(&self, (x, 0), vec![]) {
-                            return path;
-                        }
+                        return Self::_iterate(self, (x, 0), vec![]);
                     }
                     if last == 'S' {
-                        if let Some(path) = Self::_iterate(&self, (x, width), vec![]) {
-                            return path;
-                        }
+                        return Self::_iterate(self, (x, width), vec![]);
                     }
                 }
-            }
-        };
-        println!("answer: {:?}", answer);
-        vec![]
+            };
+        }
+        Some(vec![])
     }
 
     fn _iterate(
-        &self,
+        &mut self,
         (x, y): (usize, usize),
         mut path: Vec<(usize, usize)>,
     ) -> Option<Vec<(usize, usize)>> {
-        let mut str_x_y = x.to_string();
-        let y_str = y.to_string();
-        str_x_y.push_str(&y_str);
+        let now_visited = self.map[0].len() * x + y;
 
-        println!("THE XY HERE: {:?}", str_x_y);
-        self.visited.take().insert(str_x_y, true);
+        self.visited.insert(now_visited);
 
-        if let Some(arr) = self.map.get(x) {
-            println!("what is the arr: {:?}", arr);
+        if let Some(arr) = &mut self.map.get(x) {
             if let Some(val) = arr.get(y) {
                 match val {
                     'P' | 'S' => {
                         path.push((x, y));
 
-                        for viable_target in Self::viable_paths(&self, (x, y)) {
-                            let res = Self::_iterate(&self, viable_target, path.clone());
+                        for viable_target in Self::viable_paths(self, (x, y)) {
+                            let res = Self::_iterate(self, viable_target, path.clone());
                             if let Some(end) = res {
                                 return Some(end);
                             }
@@ -128,15 +116,9 @@ impl Map {
 
         self.map.get(x + 1).map(|arr| {
             arr.get(y).map(|_| {
-                let x_p_o = x + 1;
-                let mut str_x_y = x_p_o.to_string();
-                let y_str = y.to_string();
-                str_x_y.push_str(&y_str);
-                println!("what is the str: {:?}", str_x_y);
+                let now_visited = self.map[0].len() * (x + 1) + y;
 
-                str_x_y.push('y');
-                if !self.visited.take().contains_key(&str_x_y) {
-                    println!("THISS IS BEING REACHED");
+                if !&self.visited.contains(&now_visited) {
                     viable_paths.push((x + 1, y))
                 }
             })
@@ -144,12 +126,9 @@ impl Map {
 
         self.map.get(x - 1).map(|arr| {
             arr.get(y).map(|_| {
-                let x_p_o = x - 1;
-                let mut str_x_y = x_p_o.to_string();
-                let y_str = y.to_string();
-                str_x_y.push_str(&y_str);
+                let now_visited = self.map[0].len() * (x - 1) + y;
 
-                if !self.visited.take().contains_key(&str_x_y) {
+                if !&self.visited.contains(&now_visited) {
                     viable_paths.push((x - 1, y))
                 }
             })
@@ -157,12 +136,9 @@ impl Map {
 
         self.map.get(x).map(|arr| {
             arr.get(y + 1).map(|_| {
-                let y_p_o = y + 1;
-                let mut str_x_y = x.to_string();
-                let x_str = y_p_o.to_string();
-                str_x_y.push_str(&x_str);
+                let now_visited = self.map[0].len() * x + (y + 1);
 
-                if !self.visited.take().contains_key(&str_x_y) {
+                if !&self.visited.contains(&now_visited) {
                     viable_paths.push((x, y + 1))
                 }
             })
@@ -170,12 +146,9 @@ impl Map {
 
         self.map.get(x).map(|arr| {
             arr.get(y - 1).map(|_| {
-                let y_p_o = y - 1;
-                let mut str_x_y = x.to_string();
-                let x_str = y_p_o.to_string();
-                str_x_y.push_str(&x_str);
+                let now_visited = self.map[0].len() * x + (y - 1);
 
-                if !self.visited.take().contains_key(&str_x_y) {
+                if !&self.visited.contains(&now_visited) {
                     viable_paths.push((x, y - 1))
                 }
             })
