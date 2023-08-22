@@ -54,6 +54,16 @@ impl BTree {
         nums
     }
 
+    pub fn compare_b_tree(&self, b: &BTree) -> bool {
+        /*
+         *
+         * Do a in order recursive check
+         * on each node;
+         *
+         */
+
+        BTree::cmp_a_b(&self.head, &b.head)
+    }
     // Private
     fn recursvie_print(node: &Link, nums: &mut Vec<usize>) {
         if let Some(node) = node.clone().take() {
@@ -121,5 +131,39 @@ impl BTree {
         } else {
             true
         }
+    }
+
+    fn cmp_a_b(a: &Link, b: &Link) -> bool {
+        /*
+        *
+        *Base cases:
+        1. If both nodes are None; -> true
+        2. if either node is None; -> false
+        3. if node.a.val == node.b.val; -> true
+        else -> false
+        *
+        */
+
+        let is_equal = if let Some(node_a) = a {
+            if let Some(node_b) = b {
+                if node_b.borrow().val == node_a.borrow().val {
+                    BTree::cmp_a_b(&node_a.clone().borrow().left, &node_b.clone().borrow().left)
+                        && BTree::cmp_a_b(
+                            &node_a.clone().borrow().right,
+                            &node_b.clone().borrow().right,
+                        )
+                } else {
+                    false
+                }
+            } else {
+                false
+            }
+        } else if let Some(node_b) = b {
+            false
+        } else {
+            true
+        };
+
+        is_equal
     }
 }

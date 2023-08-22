@@ -17,6 +17,12 @@ fn main() {
 
     let post_order = b_tree.print_tree_in_post_order();
     println!("Post order: {:?}", post_order);
+
+    let mut other_tree = BTree::default(20);
+    make_tree(&mut other_tree);
+
+    let are_trees_equal = b_tree.compare_b_tree(&other_tree);
+    println!("are trees equal: {:?}", are_trees_equal);
 }
 
 fn make_tree(b_tree: &mut BTree) {
