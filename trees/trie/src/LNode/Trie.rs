@@ -1,10 +1,10 @@
-use std::borrow::BorrowMut;
+use std::collections::HashMap;
 
-use super::LNode::{LNode, Link};
+use super::LNode::LNode;
 
 #[derive(Debug, Default)]
 struct Trie {
-    head: Vec<Link>,
+    head: HashMap<char, LNode>,
 }
 
 impl Trie {
@@ -18,28 +18,20 @@ impl Trie {
         let mut curr_node = &self.head;
 
         for letter in word.chars() {
-            for node in curr_node {
-                match node {
-                    Some(deref_n) => {
-                        if deref_n.val == letter {
-                            curr_node = &deref_n.links;
-                            break;
-                        }
-                    }
-                    _ => (),
-                };
-            }
-
-            // No match found in current options
-            let last_letter = word.chars().last();
-            let mut is_word = false;
-            if let Some(ll) = last_letter {
-                if ll == letter {
-                    is_word = true;
+            if curr_node.contains_key(&letter) {
+                if let Some(node) = curr_node.get(&letter) {
+                    curr_node = &node.links;
                 }
+            } else {
+                curr_node.insert(
+                    letter,
+                    LNode {
+                        is_word: false,
+                        val: letter,
+                        links: HashMap::new(),
+                    },
+                );
             }
-
-            curr_node.borrow_mut().push(LNode::new(letter, is_word))
         }
     }
 }
