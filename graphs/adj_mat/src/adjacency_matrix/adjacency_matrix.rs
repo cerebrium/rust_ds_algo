@@ -11,6 +11,7 @@ impl AdjM {
         let mut q: Vec<usize> = vec![0];
         let mut v = vec![0; self.data.len()];
         let mut p = vec![-1];
+        let mut prev_idx = 0;
 
         for _ in 0..self.data.len() - 1 {
             p.push(-1);
@@ -55,7 +56,8 @@ impl AdjM {
                         }
                     }
 
-                    p[*weight] = val as i32;
+                    p[val] = prev_idx;
+                    prev_idx = val as i32;
                     v[vertex] = 1;
                     q.push(vertex);
                 }
@@ -69,20 +71,32 @@ impl AdjM {
          * is the node that has target as a child. Walk back
          * until -1, to find the path.
          */
-        if p[target] == -1 {
+        if prev_idx == -1 {
             vec![-1]
         } else {
-            let mut next = target;
+            let mut next = prev_idx as usize;
+            let mut prev_next = p.len() + 1;
             let mut path: Vec<i32> = vec![];
-            while let Some(decendant) = p.get(next) {
-                if *decendant == -1 {
+
+            /*
+             *
+             * v arr:
+             * idx: vertex
+             * val: parent
+             *
+             */
+
+            loop {
+                if next > p.len() || p[next] < 0 || prev_next == next {
                     break;
                 }
-                path.push(*decendant);
-                next = path[*decendant as usize] as usize;
-                println!("inside the while: {:?}", next);
+
+                path.push(next as i32);
+                prev_next = next;
+                next = p[next] as usize;
             }
 
+            path.reverse();
             path
         }
     }
