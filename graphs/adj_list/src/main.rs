@@ -1,5 +1,9 @@
+use GNode::Graph::AdjacencyList;
+
 mod GNode;
 
 fn main() {
-    println!("Hello, world!");
+    let graph = AdjacencyList::default();
+    let path = graph.in_order_dfs(5, 0);
+    println!("path: {:?}", path);
 }
