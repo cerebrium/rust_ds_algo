@@ -21,7 +21,7 @@ fn main() {
             let is_equal = num as usize == res_v;
             println!("is equal: {:?} {:?} {:?}", is_equal, num, res_v);
         } else {
-            println!("No Value");
+            println!("No Value here");
         }
     }
 }
