@@ -1,9 +1,9 @@
 fn main() {
     let nums: Vec<usize> = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    let found_true: bool = binary_search(&nums, &6);
-    let high_bound_found: bool = binary_search(&nums, &10);
-    let low_found_found: bool = binary_search(&nums, &1);
-    let not_found: bool = binary_search(&nums, &20);
+    let found_true: bool = binary_search(&nums, 6);
+    let high_bound_found: bool = binary_search(&nums, 10);
+    let low_found_found: bool = binary_search(&nums, 1);
+    let not_found: bool = binary_search(&nums, 20);
 
     println!(
         "found_true: {:?} \n high_bound_true: {:?} \n low_bound_true: {:?} \n not_found: {:?}",
@@ -11,34 +11,25 @@ fn main() {
     );
 }
 
-fn binary_search(nums: &Vec<usize>, target: &usize) -> bool {
-    let mut high: usize = nums.len();
-    let mut low: usize = 0;
+fn binary_search(nums: &[usize], target: usize) -> bool {
+    let mut min: usize = 0;
+    let mut max: usize = nums.len();
 
-    while low < high {
-        // Rust integers already round down
-        let mid = low + (high - low) / 2;
-        let mid_value = nums.get(mid);
+    while min < max {
+        let mid: usize = (max - min) / 2 + min;
+        let val: usize = nums[mid];
 
-        match mid_value {
-            Some(mid_value) if mid_value == target => {
-                return true;
-            }
-            Some(mid_value) if mid_value > target => {
-                // Higher than mid, look lower
-                high = mid;
-            }
-            Some(mid_value) if mid_value < target => {
-                // Lower than mid look higher
-                low = mid + 1;
-            }
-            None => {
-                return false;
-            }
-            Some(_) => {
-                return false;
-            }
+        if target == val {
+            return true;
         }
+
+        if val > target {
+            // Check bottom half
+            max = mid;
+            continue;
+        }
+
+        min = mid + 1
     }
 
     false
